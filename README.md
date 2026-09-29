@@ -201,6 +201,109 @@ This is your comprehensive, deep-dive study guide for the AWS Certified Cloud Pr
 *Rule of Thumb:* As you move from IaaS (EC2) to PaaS (RDS/Lambda) to SaaS (Chime), AWS takes on more management responsibility, but **you are ALWAYS responsible for your data and your IAM access.**
 
 ---
+# 🧩 Part 7: The Missing Exam Essentials (Support, Billing, Concepts & Migration)
+
+*This document covers the critical Cloud Concepts, Billing, and Migration topics that complete your CLF-C02 study guide. These domains make up roughly 25% of the exam.*
+
+---
+
+## 🤝 Neighborhood 7: AWS Support Plans (Who do I call when things break?)
+*The exam loves to test your knowledge of which support plan provides specific features, especially response times and the Technical Account Manager (TAM).*
+
+### The 4 Support Tiers:
+1.  **Basic (Free):**
+    *   **Includes:** 24/7 customer service, access to documentation, AWS Personal Health Dashboard, and **7 core Trusted Advisor checks** (Security and Service Limits only).
+    *   *Best for:* Testing and experimentation.
+2.  **Developer ($29/month or 3% of AWS spend):**
+    *   **Includes:** All Basic features + **Business-hours email access** to Cloud Support Associates.
+    *   *Best for:* Individuals or small teams experimenting with AWS.
+3.  **Business ($100/month or 10% of AWS spend):**
+    *   **Includes:** All Developer features + **24/7 phone, email, and chat support**.
+    *   **Key Exam Fact:** Includes **< 1-hour response time** for "Production System Impaired" issues.
+    *   **Key Exam Fact:** Unlocks the **Full suite of Trusted Advisor checks** (including Cost Optimization and Performance).
+    *   *Best for:* Production workloads.
+4.  **Enterprise ($15,000/month or 10% of AWS spend):**
+    *   **Includes:** All Business features + **< 15-minute response time** for "Business-Critical System Down" issues.
+    *   **Key Exam Fact:** Includes a dedicated **Technical Account Manager (TAM)**.
+    *   **Key Exam Fact:** Includes **Infrastructure Event Management** (AWS provides extra support during big events like Black Friday) and a **Concierge** team for billing/account inquiries.
+    *   *Best for:* Business-critical, mission-critical production workloads.
+
+### 🪤 Exam Traps for Support Plans:
+*   **Trap:** "I need 24/7 phone support and a 1-hour response time for a production issue." -> **Answer:** Business (or Enterprise). Developer only offers email support.
+*   **Trap:** "I need a Technical Account Manager (TAM)." -> **Answer:** Enterprise ONLY.
+*   **Trap:** "I need full Cost Optimization checks in Trusted Advisor." -> **Answer:** Business or Enterprise. (Basic/Developer only get the 7 core security/limit checks).
+
+---
+
+## ☁️ Cloud Concepts & The 6 Advantages of Cloud Computing
+*AWS defines cloud computing by six distinct advantages. The exam will describe a scenario and ask which advantage it represents.*
+
+1.  **Trade capital expense (CapEx) for variable expense (OpEx):** Instead of investing heavily in data centers and servers before you know how you're going to use them, you pay only when you consume computing resources.
+2.  **Benefit from massive economies of scale:** By using cloud computing, you can achieve a lower variable cost than you can get on your own, because AWS usage is aggregated from hundreds of thousands of customers.
+3.  **Stop guessing capacity:** Eliminate guessing on your infrastructure capacity needs. Access as much or as little capacity as you need, and scale up and down as needed with only a few minutes’ notice.
+4.  **Increase speed and agility:** Make your IT resources available to your developers in minutes, not weeks or months.
+5.  **Stop spending money running and maintaining data centers:** Focus on projects that differentiate your business, not the undifferentiated heavy lifting of racking, stacking, and powering servers.
+6.  **Go global in minutes:** Easily deploy your application in multiple Regions around the world with a few clicks to provide lower latency and a better experience for your customers.
+
+### Cloud Deployment Models:
+*   **Public Cloud:** AWS, Azure, GCP. Owned and operated by a third-party cloud service provider.
+*   **Private Cloud:** Cloud resources used exclusively by a single business or organization. Can be physically located on the company's on-site datacenter or hosted by a third-party provider.
+*   **Hybrid Cloud:** Connects public and private clouds, allowing data and applications to be shared between them (e.g., using AWS Direct Connect to link an on-prem data center to a VPC).
+
+---
+
+##  The 6 Rs of Cloud Migration
+*When a company moves to AWS, they must choose a migration strategy. The exam will describe an application and ask which "R" is being used.*
+
+1.  **Rehost ("Lift and Shift"):** Moving an application to the cloud without making any changes to the code or architecture. (e.g., Moving an on-premises VM directly to an EC2 instance). *Fastest, but doesn't take advantage of cloud-native features.*
+2.  **Replatform ("Lift, Tinker, and Shift"):** Making a few cloud optimizations to achieve some tangible benefit, but not changing the core architecture. (e.g., Moving an on-premises SQL database to **Amazon RDS**).
+3.  **Repurchase ("Drop and Shop"):** Moving to a different product, typically by switching from a traditional license to a SaaS model. (e.g., Canceling your on-premises CRM and moving to **Salesforce** or **Amazon Connect**).
+4.  **Refactor / Re-architect:** Re-imagining how the application is architected and developed, typically to take full advantage of cloud-native features. (e.g., Rewriting a monolithic app into microservices using **AWS Lambda** and **API Gateway**). *Most expensive and time-consuming, but offers the highest long-term ROI.*
+5.  **Retire:** Turning off applications that are no longer needed in the source IT environment, saving money and resources.
+6.  **Retain:** Keeping applications in the source environment (on-premises). Usually done for compliance reasons, or because the app is too complex/legacy to migrate right now.
+
+---
+
+## 💰 Advanced Billing & Cost Management Tools
+*The Billing domain makes up ~12% of the exam. You must know the specific purpose of each billing tool.*
+
+### 1. The AWS Free Tier
+*   **12 Months Free:** (e.g., 750 hours of t2.micro/t3.micro EC2 per month, 5GB of S3 storage).
+*   **Always Free:** (e.g., 1 million AWS Lambda requests per month, 25GB of DynamoDB storage).
+*   **Trials:** Short-term free trials for other AWS services (e.g., Amazon Redshift for 2 months).
+
+### 2. Cost Allocation Tags
+*   **What they are:** Metadata attached to AWS resources to track costs.
+*   **User-Defined Tags:** Created by you (e.g., `Department: Marketing`, `Project: Alpha`).
+*   **AWS-Generated Tags:** Automatically created by AWS (e.g., `aws:createdBy`, `aws:cloudformation:stack-name`).
+*   *Exam Focus:* To use tags for billing, you **must activate them** in the Billing and Cost Management console.
+
+### 3. Consolidated Billing (via AWS Organizations)
+*   **What it does:** Links multiple AWS accounts under one master payer account.
+*   **Two Massive Benefits:**
+    1.  **Single Bill:** You get one bill for all accounts.
+    2.  **Volume Pricing Discounts:** AWS combines the usage of all linked accounts to qualify for tiered volume discounts (e.g., if Account A uses 40TB of S3 and Account B uses 40TB, the master account gets the 80TB discount rate).
+    3.  **Shared Reserved Instances:** RI and Savings Plan discounts apply across all accounts in the organization automatically.
+
+### 4. AWS Cost and Usage Report
+*   **What it is:** The **most granular** billing data available.
+*   **How it works:** It delivers detailed CSV files containing line-item billing data directly to an **Amazon S3 bucket**. You can then analyze it using Amazon Athena or QuickSight.
+*   *Exam Trap:* If the question asks for the "most detailed" or "granular" billing data, the answer is **Cost and Usage Report**, not Cost Explorer.
+
+---
+
+##  Final "Magic Words" Additions
+
+Add these to your cheat sheet from the previous document:
+
+*   **"Technical Account Manager (TAM)"** → Enterprise Support Plan
+*   **"24/7 phone support" + "Production system impaired"** → Business Support Plan
+*   **"Lift and shift"** → Rehost
+*   **"Lift, tinker, and shift" (e.g., moving to RDS)** → Replatform
+*   **"Drop and shop" (e.g., moving to Salesforce)** → Repurchase
+*   **"Most granular billing data" + "CSV to S3"** → AWS Cost and Usage Report
+*   **"Combine usage for volume discounts"** → Consolidated Billing (AWS Organizations)
+*   **"Track costs by department or project"** → Cost Allocation Tags
 
 ## 🎯 The "Magic Words" Exam Cheat Sheet
 
